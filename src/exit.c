@@ -1,47 +1,78 @@
-#include "../minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mehakcan <mehakcan@student.42.com.tr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/30 13:11:26 by mehakcan          #+#    #+#             */
+/*   Updated: 2024/07/30 16:27:00 by mehakcan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-t_malloc *g_garbage_collector = NULL;
+#include <stdio.h>
+#include "../includes/minishell.h"
+#include "../libft/libft.h"
+#include <readline/history.h>
 
-void add_garbage_c(void *ptr)
+t_malloc  *get_garbage_c(void)
 {
-    t_malloc *new_node = malloc(sizeof(t_malloc));
-    if (!new_node)
-    {
-        exit(EXIT_FAILURE);
-    }
-    new_node->ptr = ptr;
-    new_node->next = g_garbage_collector;
-    g_garbage_collector = new_node;
+    static  t_malloc *garbage_c = {NULL, NULL};
+
+    return (&garbage_c);
 }
 
-void gc_free(void)
+void    gc_free(void)
 {
-    t_malloc *current = g_garbage_collector;
-    t_malloc *tmp;
-    while (current)
+    t_malloc    *tmp;
+    t_malloc    *garbage_c;
+
+    garbage_c = get_garbage_c()->next;
+    while (garbage_c)
     {
-        free(current->ptr);
-        tmp = current;
-        current = current->next;
+        tmp = garbage_c;
+        garbage_c = garbage_c->next;
+        free(tmp->ptr);
         free(tmp);
     }
-    g_garbage_collector = NULL;
 }
 
-void *gc_malloc(unsigned int size)
+void    *gc_malloc(unsigned int size)
 {
-    void *ptr = malloc(size);
+    void *ptr;
+    t_malloc    *garbage_c;
+
+    garbage_c = get_garbage_c();
+    while (garbage_c->next)
+        garbage_c = garbage_c->next;
+    garbage_c->next = ft_calloc(1, sizeof(t_malloc));
+    if (!garbage_c->next)
+        ft_exit();
+    ptr = ft_calloc(1, size);
     if (!ptr)
-    {
-        gc_free();
-        exit(EXIT_FAILURE);
-    }
-    add_garbage_c(ptr);
-    return ptr;
+        ft_exit();
+    *garbage_c->next = (t_malloc){.ptr = ptr, .next = NULL};
+    return (ptr);
 }
 
-void ft_exit(t_data *data)
+void	add_garbage_c(void *ptr)
+{
+	t_malloc	*garbage_c;
+
+	if (!ptr)
+		ft_exit();
+	garbage_c = get_garbage_c();
+	while (garbage_c->next)
+		garbage_c = garbage_c->next;
+	garbage_c->next = ft_calloc(1, sizeof(t_malloc));
+	if (!garbage_c->next)
+		ft_exit();
+	*garbage_c->next = (t_malloc){.ptr = ptr, .next = NULL};
+}
+
+void    ft_exit(void)
 {
     gc_free();
+    clear_history();
     exit(1);
 }

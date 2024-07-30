@@ -1,35 +1,64 @@
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
-SRCDIR = src
-INCDIR = includes
-LIBFTDIR = libft
-LIBFT = $(LIBFTDIR)/libft.a
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mehakcan <mehakcan@student.42.com.tr>      +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/07/30 13:36:26 by mehakcan          #+#    #+#              #
+#    Updated: 2024/07/30 16:29:27 by mehakcan         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-SRCS = $(SRCDIR)/main.c \
-       $(SRCDIR)/prompt.c \
-       $(SRCDIR)/lexer.c \
-       $(SRCDIR)/exit.c \
-       $(SRCDIR)/command.c
-
-OBJS = $(SRCS:.c=.o)
 NAME = minishell
 
-all: $(NAME)
+CC = cc
 
-$(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) -lreadline
+RM = rm -rf
+
+CF = -Wall -Wextra -Werror -g
+SRC = src/main.c \
+		src/exit.c \
+
+LIBFT = libft/libft.a
+
+OBJ_DIR = .objs
+
+OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
+
+all : $(NAME)
+
+$(NAME): $(OBJ) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBFT) -lreadline
+
+$(OBJ_DIR)/%.o: %.c
+	@mkdir -p $(@D)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(LIBFT):
-	make -C $(LIBFTDIR)
+	@$(MAKE) -C libft
 
 clean:
-	rm -f $(OBJS)
-	make clean -C $(LIBFTDIR)
+	@$(RM) $(OBJ_DIR)
+	@$(MAKE) -C libft clean
 
 fclean: clean
-	rm -f $(NAME)
-	make fclean -C $(LIBFTDIR)
+	@$(RM) $(NAME)
+	@$(MAKE) -C libft fclean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+iclean:
+	@grep -v '^#' .gitignore | grep -v '^$$' | while read pattern; do \
+		find . -name "$$pattern" -exec rm -rf {} +; \
+	done
+
+norm:
+	@if norminette | grep -q "Error"; then \
+		echo "Norminette: \033[31m[KO]\033[0m"; \
+		norminette | grep "Error"; \
+	else \
+		echo "Norminette: \033[32m[OK]\033[0m"; \
+	fi
+
+.PHONY: all fclean clean re
