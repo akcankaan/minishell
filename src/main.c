@@ -65,12 +65,12 @@ int main(int ac, char **av, char **env)
         get_readline(&data);
         lexer(&data);
         //token a ekleme yapılıp yapılmadığını kontrol etmek için
-        // while (data.token)
-        // {
-        //     printf("Value = %s\n", data.token->value);
-        //     printf("Type = %d\n", data.token->type);
-        //     data.token = data.token->next;
-        // }
+        //while (data.token)
+        //{
+        //    printf("Value = %s\n", data.token->value);
+        //    printf("Type = %d\n", data.token->type);
+        //    data.token = data.token->next;
+        //}
         single_command(&data);
         free_token(&data);
         free(data.cmd);

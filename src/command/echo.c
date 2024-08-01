@@ -11,8 +11,7 @@ void	echo(t_data *data)
 			return ;
 		if (data->token->next && (is_args(data->token->next)))
 			printf(" ");
-		if (data->token->next)
-			data->token = data->token->next;
+		data->token = data->token->next;
 	}
 	printf("\n");
 }
