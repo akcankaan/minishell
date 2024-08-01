@@ -6,7 +6,7 @@
 #    By: iecer <iecer@student.42kocaeli.com.tr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 13:36:26 by mehakcan          #+#    #+#              #
-#    Updated: 2024/07/31 21:40:14 by iecer            ###   ########.fr        #
+#    Updated: 2024/08/01 23:58:19 by iecer            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = cc
 
 RM = rm -rf
 
-CF = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g
 SRC = src/main.c \
 		src/exit.c \
 		src/utils/utils.c \

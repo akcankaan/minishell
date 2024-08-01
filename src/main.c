@@ -16,7 +16,7 @@ void    initilazor(t_data *data)
 
 void    get_readline(t_data *data)
 {
-    data->cmd = readline("WSB Team Minishell$ ");
+    data->cmd = readline("Minishell$ ");
     if (data->cmd && !is_space(data->cmd))
     {
         free(data->cmd);

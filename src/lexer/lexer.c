@@ -1,5 +1,6 @@
 #include "../../includes/minishell.h"
 #include "../../libft/libft.h"
+#include <stdio.h>
 
 void	lexer_word(t_data *data, int *i)
 {
@@ -10,6 +11,7 @@ void	lexer_word(t_data *data, int *i)
 	while (data->cmd[end] && !(ft_strchr(" \t\v\f|<>\'\"", data->cmd[end])))
 		++end;
 	node = new_token(WORD, ft_substr(data->cmd, *i, end - *i));
+	printf("%d\n", node->type);
 	add_garbage_c(node->value);
 	add_token_back(&data->token, node);
 	*i = end - 1;
@@ -30,6 +32,7 @@ void	lexer_quote(t_data *data, int *i, enum e_token_type type)
 			return;
 		}
 	node = new_token(type, ft_substr(data->cmd, *i + 1, end - *i - 1));
+	printf("%d\n", node->type);
 	add_garbage_c(node->value);
 	add_token_back(&data->token, node);
 	*i = end;
