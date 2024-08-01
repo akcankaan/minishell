@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mehakcan <mehakcan@student.42.com.tr>      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/30 12:56:22 by mehakcan          #+#    #+#             */
-/*   Updated: 2024/07/30 16:25:35 by mehakcan         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <stdio.h>
 #include "../libft/libft.h"
 #include "../includes/minishell.h"
@@ -24,6 +12,19 @@ void    initilazor(t_data *data)
     data->token = NULL;
     data->cmd = 0;
     data->prompt = 0;
+}
+
+void    get_readline(t_data *data)
+{
+    data->cmd = readline("WSB Team Minishell$ ");
+    if (data->cmd && !is_space(data->cmd))
+    {
+        free(data->cmd);
+        get_readline(data);
+    }
+    if (!data->cmd)
+        ft_exit();
+    add_history(data->cmd);
 }
 
 void	create_env(char **envp, t_data *data)
@@ -61,10 +62,18 @@ int main(int ac, char **av, char **env)
         create_env(env, &data);
     while (1)
     {
-        data.cmd = readline("WSB Team Minishel$ ");
-        if (!data.cmd)
-            break ;
-        add_history(data.cmd);
+        get_readline(&data);
+        lexer(&data);
+        //token a ekleme yapılıp yapılmadığını kontrol etmek için
+        // while (data.token)
+        // {
+        //     printf("Value = %s\n", data.token->value);
+        //     printf("Type = %d\n", data.token->type);
+        //     data.token = data.token->next;
+        // }
+        single_command(&data);
+        free_token(&data);
+        free(data.cmd);
     }
     ft_exit();
     return (0);

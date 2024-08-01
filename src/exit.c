@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mehakcan <mehakcan@student.42.com.tr>      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/30 13:11:26 by mehakcan          #+#    #+#             */
-/*   Updated: 2024/07/30 16:27:00 by mehakcan         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <stdio.h>
 #include "../includes/minishell.h"
 #include "../libft/libft.h"
@@ -17,8 +5,7 @@
 
 t_malloc  *get_garbage_c(void)
 {
-    static  t_malloc *garbage_c = {NULL, NULL};
-
+    static  t_malloc garbage_c = {NULL, NULL};
     return (&garbage_c);
 }
 
@@ -75,4 +62,41 @@ void    ft_exit(void)
     gc_free();
     clear_history();
     exit(1);
+}
+void	garbage_collecter(void *ptr)
+{
+	t_malloc	*garbage_c;
+	t_malloc	*tmp;
+
+	if (!ptr)
+		return ;
+	garbage_c = get_garbage_c();
+	while (garbage_c)
+	{
+		if (garbage_c->ptr == ptr)
+		{
+			tmp->next = garbage_c->next;
+			free(garbage_c);
+			free(ptr);
+			ptr = NULL;
+			return ;
+		}
+		tmp = garbage_c;
+		garbage_c = garbage_c->next;
+	}
+}
+void	free_token(t_data *data)
+{
+	t_token	*token;
+	t_token	*tmp;
+
+	token = data->token;
+	while (token)
+	{
+		tmp = token;
+		token = token->next;
+		garbage_collecter(tmp->value);
+		garbage_collecter(tmp);
+	}
+	data->token = NULL;
 }

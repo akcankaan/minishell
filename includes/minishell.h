@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mehakcan <mehakcan@student.42.com.tr>      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/30 12:57:17 by mehakcan          #+#    #+#             */
-/*   Updated: 2024/07/30 16:22:26 by mehakcan         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -55,6 +44,7 @@ typedef struct s_data
     t_token *token;
     char    *prompt;
     char    *cmd;
+    int     syntax;
     int    exit_status;
 }              t_data;
 
@@ -63,9 +53,30 @@ void    *gc_malloc(unsigned int size);
 void    ft_exit(void);
 void    gc_free(void);
 void    add_garbage_c(void *ptr);
+void	free_token(t_data *data);
 
 // main.c
 void    initilazor(t_data *data);
 void    create_env(char **envp, t_data *data);
+
+// utils.c
+int	is_space(char *cmd);
+int	is_args(t_token *node);
+int	is_validchar(int c);
+
+// parser.c
+void	single_command(t_data *data);
+
+
+// token.c
+t_token	*new_token(enum e_token_type type, char *value);
+t_token	*last_token(t_token *node);
+void	add_token_back(t_token **node, t_token *new);
+
+// lexer.c
+void	lexer(t_data *data);
+
+//echo.c
+void	echo(t_data *data);
 
 #endif
