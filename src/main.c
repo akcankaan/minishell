@@ -27,6 +27,20 @@ void    get_readline(t_data *data)
     add_history(data->cmd);
 }
 
+t_env    *get_env(t_data *data, char *key)
+{
+    t_env	*node;
+
+    node = data->env;
+    while (node)
+    {
+        if (!ft_strcmp(node->key, key))
+            return (node);
+        node = node->next;
+    }
+    return (NULL);
+}
+
 void	create_env(char **envp, t_data *data)
 {
 	t_env	*node;

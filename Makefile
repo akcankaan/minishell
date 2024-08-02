@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: iecer <iecer@student.42kocaeli.com.tr>     +#+  +:+       +#+         #
+#    By: mehakcan <mehakcan@student.42.com.tr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 13:36:26 by mehakcan          #+#    #+#              #
-#    Updated: 2024/08/01 23:58:19 by iecer            ###   ########.fr        #
+#    Updated: 2024/08/02 17:06:58 by mehakcan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,9 @@ SRC = src/main.c \
 		src/lexer/lexer.c \
 		src/lexer/token.c \
 		src/command/echo.c \
+		src/command/env.c \
+		src/command/pwd.c \
+		src/command/exit.c \
 		src/parser/parser.c \
 
 LIBFT = libft/libft.a

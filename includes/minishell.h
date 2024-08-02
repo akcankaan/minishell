@@ -58,6 +58,7 @@ void	free_token(t_data *data);
 // main.c
 void    initilazor(t_data *data);
 void    create_env(char **envp, t_data *data);
+t_env    *get_env(t_data *data, char *key);
 
 // utils.c
 int	is_space(char *cmd);
@@ -76,7 +77,11 @@ void	add_token_back(t_token **node, t_token *new);
 // lexer.c
 void	lexer(t_data *data);
 
-//echo.c
+//command
 void	echo(t_data *data);
+void    env(t_data *data);
+void    cmd_pwd(t_data *data);
+void    cmd_exit(t_data *data);
+
 
 #endif
