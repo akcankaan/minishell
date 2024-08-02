@@ -15,14 +15,7 @@ int	is_space(char *cmd)
 
 int	is_args(t_token *node)
 {
-	if (node->type == WORD)
-		return (1);
-	else if (node->type == DOUBLE_QUOTE)
-		return (2);
-	else if (node->type == SINGLE_QUOTE)
-		return (3);
-	else
-		return (0);
+	return (node->type == WORD || node->type == SINGLE_QUOTE || node->type == DOUBLE_QUOTE);
 }
 
 int	is_validchar(int c)
