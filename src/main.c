@@ -85,7 +85,7 @@ int main(int ac, char **av, char **env)
         //    printf("Type = %d\n", data.token->type);
         //    data.token = data.token->next;
         //}
-        single_command(&data);
+        parse_commands(&data);
         free_token(&data);
         free(data.cmd);
     }

@@ -65,8 +65,10 @@ t_env    *get_env(t_data *data, char *key);
 int	is_space(char *cmd);
 int	is_args(t_token *node);
 int	is_validchar(int c);
+int	rdir(t_token *node);
 
 // parser.c
+void    parse_commands(t_data *data);
 void	single_command(t_data *data);
 
 

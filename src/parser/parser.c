@@ -35,3 +35,33 @@ void single_command(t_data *data) {
     }
 }
 
+int how_many_command(t_data *data)
+{
+    t_token *node;
+
+    node = data->token;
+    if((is_args(node) && !node->next))
+        return(1);
+    else
+    {
+        while (node)
+        {
+            if (node->type == PIPE || rdir(node))
+                return (0);
+            node = node->next;
+        }
+        return (1);
+    }
+    return (0);
+}
+
+void parse_commands(t_data *data)
+{
+    if (!data->token)
+        return;
+
+    if (how_many_command(data) == 1)
+        single_command(data);
+    // else
+       // multiple_cmd(data);
+}

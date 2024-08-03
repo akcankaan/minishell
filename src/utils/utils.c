@@ -22,3 +22,11 @@ int	is_validchar(int c)
 {
 	return (ft_isprint(c) && c != ' ');
 }
+
+int	rdir(t_token *node)
+{
+	if (node->type == HERADOC)
+		return (2);
+	return (node->type == REDIRECT_IN || node->type == REDIRECT_OUT
+			|| node->type == APPEND);
+}
