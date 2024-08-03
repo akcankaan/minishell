@@ -54,6 +54,7 @@ void    ft_exit(void);
 void    gc_free(void);
 void    add_garbage_c(void *ptr);
 void	free_token(t_data *data);
+void	garbage_collecter(void *ptr);
 
 // main.c
 void    initilazor(t_data *data);
@@ -82,6 +83,8 @@ void	echo(t_data *data);
 void    env(t_data *data);
 void    cmd_pwd(t_data *data);
 void    cmd_exit(t_data *data);
-
+void	cmd_export(t_data*data);
+void	cmd_unset(t_data *data);
+void	cmd_cd(t_data *data);
 
 #endif

@@ -26,6 +26,9 @@ SRC = src/main.c \
 		src/command/env.c \
 		src/command/pwd.c \
 		src/command/exit.c \
+		src/command/export.c \
+		src/command/unset.c \
+		src/command/cd.c \
 		src/parser/parser.c \
 
 LIBFT = libft/libft.a
