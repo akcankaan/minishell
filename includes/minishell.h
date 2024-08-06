@@ -55,6 +55,8 @@ void    gc_free(void);
 void    add_garbage_c(void *ptr);
 void	free_token(t_data *data);
 void	garbage_collecter(void *ptr);
+void    print_error(t_token *node, char *str, int exit_status);
+
 
 // main.c
 void    initilazor(t_data *data);
@@ -66,6 +68,7 @@ int	is_space(char *cmd);
 int	is_args(t_token *node);
 int	is_validchar(int c);
 int	rdir(t_token *node);
+int	skip_space(char *str, int i);
 
 // parser.c
 void    parse_commands(t_data *data);
@@ -88,5 +91,7 @@ void    cmd_exit(t_data *data);
 void	cmd_export(t_data*data);
 void	cmd_unset(t_data *data);
 void	cmd_cd(t_data *data);
+int						*get_exit_status(void);
+
 
 #endif

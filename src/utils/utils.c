@@ -30,3 +30,10 @@ int	rdir(t_token *node)
 	return (node->type == REDIRECT_IN || node->type == REDIRECT_OUT
 			|| node->type == APPEND);
 }
+
+int	skip_space(char *str, int i)
+{
+	while (str[i] && str[i] == ' ')
+		i++;
+	return (i);
+}

@@ -20,15 +20,13 @@ void single_command(t_data *data) {
             else if (!ft_strcmp(data->token->value, "pwd"))
                 cmd_pwd(data);
             else if (!ft_strcmp(data->token->value, "exit"))
-                cmd_exit(data);
+                cmd_exit(data); // burası multi commandlar düzenlendiğinde parser içerisi düzenlenecek ve çalıştırılacak.
             else if (!ft_strcmp(data->token->value, "export"))
                 cmd_export(data);
             else if (!ft_strcmp(data->token->value, "unset"))
                 cmd_unset(data);
             else if (!ft_strcmp(data->token->value, "cd"))
                 cmd_cd(data);  // cd komutunu işleme
-            else
-                printf("minishell: %s: command not found\n", data->token->value);
         }
         if (data->token)
             data->token = data->token->next;

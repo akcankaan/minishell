@@ -1,61 +1,69 @@
 #include "../../includes/minishell.h"
-#include <unistd.h>
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <unistd.h>
 
-void print_error(const char *path) {
-    write(2, "minishell: cd: ", 15);
-    write(2, path, strlen(path));
-    write(2, ": No such file or directory\n", 28);
+void    update_oldpwd(t_data *data, char *old_pwd)
+{
+    t_env *node = get_env(data, "OLDPWD");
+    if (!node)
+    {
+        node = gc_malloc(sizeof(t_env));
+        node->key = ft_strdup("OLDPWD");
+        node->value = ft_strdup(old_pwd);
+        node->next = data->env;
+        data->env = node;
+    }
+    else
+    {
+        garbage_collecter(node->value);
+        node->value = ft_strdup(old_pwd);
+    }
 }
 
-void cmd_cd(t_data *data) {
-    t_token *node = data->token;
-    char *path = NULL;
-    char *home;
-
-    // 'cd' komutundan sonraki token'ı kontrol et
-    if (node && node->next) {
-        path = node->next->value;
+void    update_pwd(t_data *data)
+{
+    t_env *pwd_node = get_env(data, "PWD");
+    if (pwd_node)
+    {
+        garbage_collecter(pwd_node->value);
+        pwd_node->value = getcwd(NULL, 0);
     }
-
-    // Eğer path NULL veya boş ise HOME dizinine git
-    if (path == NULL || ft_strcmp(path, "") == 0) {
-        home = getenv("HOME");
-        if (home == NULL) {
-            write(2, "minishell: cd: HOME environment variable not set\n", 50);
-            return;
-        }
-        path = home;
+    else
+    {
+        pwd_node = gc_malloc(sizeof(t_env));
+        pwd_node->key = ft_strdup("PWD");
+        pwd_node->value = getcwd(NULL, 0);
+        pwd_node->next = data->env;
+        data->env = pwd_node;
     }
-    // '~' ile başlayan path için home dizinine git
-    else if (path[0] == '~') {
-        home = getenv("HOME");
-        if (home == NULL) {
-            write(2, "minishell: cd: HOME environment variable not set\n", 50);
-            return;
-        }
-        char *new_path = malloc(strlen(home) + strlen(path));
-        if (!new_path) {
-            write(2, "minishell: cd: memory allocation failed\n", 41);
-            return;
-        }
-        strcpy(new_path, home);
-        strcat(new_path, path + 1);
-        path = new_path;
-    }
+}
 
-    // Debugging: path ve chdir sonuçlarını yazdır
-    printf("Trying to change directory to: %s\n", path);
+char    *get_cd_path(t_data *data)
+{
+    if (data->token->next && is_args(data->token->next))
+        return (data->token->next->value);
+    
+    t_env *home_node = get_env(data, "HOME");
+    if (home_node)
+        return (home_node->value);
+    
+    print_error(data->token, ": Home not set\n", 1);
+    return (NULL);
+}
 
-    // Dizin değiştirme işlemi
-    if (chdir(path) != 0) {
-        print_error(path);
+void    cmd_cd(t_data *data)
+{
+    char *path = get_cd_path(data);
+    if (!path)
+        return;
+    
+    char *pwd = getcwd(NULL, 0);
+    if (chdir(path) == -1)
+        print_error(data->token, ": No such file or directory\n", 1);
+    else
+    {
+        update_oldpwd(data, pwd);
+        update_pwd(data);
     }
-
-    // Bellek yönetimi
-    if (path && path[0] == '~') {
-        free(path);
-    }
+    free(pwd);
 }

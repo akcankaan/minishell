@@ -56,6 +56,13 @@ void	add_garbage_c(void *ptr)
 		ft_exit();
 	*garbage_c->next = (t_malloc){.ptr = ptr, .next = NULL};
 }
+void	print_error(t_token *node, char *str, int exit_status)
+{
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(node->value, 2);
+	ft_putstr_fd(str, 2);
+	*get_exit_status() = exit_status;
+}
 
 void    ft_exit(void)
 {
