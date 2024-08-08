@@ -6,7 +6,7 @@
 #    By: mehakcan <mehakcan@student.42.com.tr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/30 13:36:26 by mehakcan          #+#    #+#              #
-#    Updated: 2024/08/06 15:44:18 by mehakcan         ###   ########.fr        #
+#    Updated: 2024/08/08 13:57:44 by mehakcan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,9 @@ SRC = src/main.c \
 		src/command/unset.c \
 		src/command/cd.c \
 		src/parser/parser.c \
+		src/parser/parser_utils.c \
+		src/use_execve.c \
+		
 
 LIBFT = libft/libft.a
 

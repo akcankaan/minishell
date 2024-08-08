@@ -64,11 +64,13 @@ void    create_env(char **envp, t_data *data);
 t_env    *get_env(t_data *data, char *key);
 
 // utils.c
+char	*ft_str_arr_join(char **str_list, unsigned int str_count);
 int	is_space(char *cmd);
 int	is_args(t_token *node);
 int	is_validchar(int c);
 int	rdir(t_token *node);
 int	skip_space(char *str, int i);
+
 
 // parser.c
 void    parse_commands(t_data *data);
@@ -86,12 +88,22 @@ void	lexer(t_data *data);
 //command
 void	echo(t_data *data);
 void    env(t_data *data);
-void    cmd_pwd(t_data *data);
+void	cmd_pwd(void);
 void    cmd_exit(t_data *data);
 void	cmd_export(t_data*data);
 void	cmd_unset(t_data *data);
-void	cmd_cd(t_data *data);
+void	cmd_cd(t_data *data, t_token *node);
 int						*get_exit_status(void);
+
+char    **env_to_char(t_data *data);
+char	*finding_path(t_data *data, t_token *node);
+void    use_execve(t_data *data);
+
+t_env	*get_pwd(t_data *data);
+
+char	**get_command_args(t_token *node);
+void    update_exit_status(t_data *data);
+
 
 
 #endif

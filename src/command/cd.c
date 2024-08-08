@@ -2,68 +2,58 @@
 #include <stdio.h>
 #include <unistd.h>
 
-void    update_oldpwd(t_data *data, char *old_pwd)
+void	update_oldpwd(t_data *data, char *pwd)
 {
-    t_env *node = get_env(data, "OLDPWD");
-    if (!node)
-    {
-        node = gc_malloc(sizeof(t_env));
-        node->key = ft_strdup("OLDPWD");
-        node->value = ft_strdup(old_pwd);
-        node->next = data->env;
-        data->env = node;
-    }
-    else
-    {
-        garbage_collecter(node->value);
-        node->value = ft_strdup(old_pwd);
-    }
+	t_env	*node;
+
+	node = get_env(data, "OLDPWD");
+	if (!node)
+	{
+		node = gc_malloc(sizeof(t_env));
+		node->key = ft_strdup("OLDPWD");
+		node->value = ft_strdup(pwd);
+		node->next = data->env;
+		data->env = node;
+	}
+	else
+	{
+		free(node->value);
+		node->value = ft_strdup(pwd);
+	}
 }
 
-void    update_pwd(t_data *data)
+void	cmd_cd(t_data *data, t_token *node)
 {
-    t_env *pwd_node = get_env(data, "PWD");
-    if (pwd_node)
-    {
-        garbage_collecter(pwd_node->value);
-        pwd_node->value = getcwd(NULL, 0);
-    }
-    else
-    {
-        pwd_node = gc_malloc(sizeof(t_env));
-        pwd_node->key = ft_strdup("PWD");
-        pwd_node->value = getcwd(NULL, 0);
-        pwd_node->next = data->env;
-        data->env = pwd_node;
-    }
-}
+	t_env	*env;
+	char	*path;
+	char	*pwd;
 
-char    *get_cd_path(t_data *data)
-{
-    if (data->token->next && is_args(data->token->next))
-        return (data->token->next->value);
-    
-    t_env *home_node = get_env(data, "HOME");
-    if (home_node)
-        return (home_node->value);
-    
-    print_error(data->token, ": Home not set\n", 1);
-    return (NULL);
-}
-
-void    cmd_cd(t_data *data)
-{
-    char *path = get_cd_path(data);
-    if (!path)
-        return;
-    
-    char *pwd = getcwd(NULL, 0);
-    if (chdir(path) == -1)
-        print_error(data->token, ": No such file or directory\n", 1);
-    else
-    {
-        update_oldpwd(data, pwd);
-        update_pwd(data);
-    }
-    free(pwd);
+	path = NULL;
+	env = get_env(data, "HOME");
+	if (node && is_args(node))
+		path = node->value;
+	else if (!node && env)
+		path = env->value;
+	else
+	{
+		ft_putstr_fd("minishell: cd: HOME not set\n", 2);
+		*get_exit_status() = 1;
+		return ;
+	}
+	pwd = getcwd(NULL, 0);
+	if (chdir(path) == -1)
+	{
+		print_error(node, ": No such file or directory\n", 1);
+		free(pwd); // Bellek sızıntısını önlemek için pwd'yi serbest bırak
+	}
+	else
+	{
+		update_oldpwd(data, pwd);
+		free(pwd); // getcwd tarafından döndürülen eski pwd'yi serbest bırakıyoruz
+		pwd = getcwd(NULL, 0);
+		t_env *pwd_node = get_pwd(data);
+		free(pwd_node->value); // Mevcut PWD değerini serbest bırakıyoruz
+		pwd_node->value = pwd;
+		add_garbage_c(pwd);
+	}
 }

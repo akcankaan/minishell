@@ -18,15 +18,19 @@ void single_command(t_data *data) {
             else if (!ft_strcmp(data->token->value, "env"))
                 env(data);
             else if (!ft_strcmp(data->token->value, "pwd"))
-                cmd_pwd(data);
+                cmd_pwd();
             else if (!ft_strcmp(data->token->value, "exit"))
                 cmd_exit(data); // burası multi commandlar düzenlendiğinde parser içerisi düzenlenecek ve çalıştırılacak.
             else if (!ft_strcmp(data->token->value, "export"))
                 cmd_export(data);
             else if (!ft_strcmp(data->token->value, "unset"))
                 cmd_unset(data);
-            else if (!ft_strcmp(data->token->value, "cd"))
-                cmd_cd(data);  // cd komutunu işleme
+            else if (!ft_strcmp(data->token->value, "cd")) {
+                cmd_cd(data, data->token->next);
+                data->token = data->token->next; // 'cd' komutunun argümanını atla
+            }
+            else
+                use_execve(data);
         }
         if (data->token)
             data->token = data->token->next;
