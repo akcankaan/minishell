@@ -36,6 +36,31 @@ void	lexer_quote(t_data *data, int *i, enum e_token_type type)
 	*i = end;
 }
 
+void lexer_redirect(t_data *data, int *i, enum e_token_type type)
+{
+	t_token	*node;
+
+	if (data->cmd[*i] == '>' && data->cmd[*i + 1] == '>')
+	{
+		node = new_token(APPEND, ft_strdup(">>"));
+		++*i;
+	}
+	else if (data->cmd[*i] == '<' && data->cmd[*i + 1] == '<')
+	{
+		node = new_token(HERADOC, ft_strdup("<<"));
+		++*i;
+	}
+	else
+	{
+		char sign[2];
+		sign[0] = data->cmd[*i];
+		sign[1] = '\0';
+		node = new_token(type, ft_strdup(sign));
+	}
+	add_garbage_c(node->value);
+	add_token_back(&data->token, node);
+}
+
 void	lexer(t_data *data)
 {
 	int		i;
@@ -54,9 +79,9 @@ void	lexer(t_data *data)
 		else if (data->cmd[i] == '\"')
 			lexer_quote(data, &i, DOUBLE_QUOTE); //lexer_double_quote
 		else if (data->cmd[i] == '<')
-			;	//lexer_redirect_in
+			lexer_redirect(data, &i, REDIRECT_IN);
 		else if (data->cmd[i] == '>')
-			;	//lexer_redirect_out
+			lexer_redirect(data, &i, REDIRECT_OUT);
 		else
 			lexer_word(data, &i);
 	}
