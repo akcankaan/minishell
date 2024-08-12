@@ -25,9 +25,10 @@ enum    e_token_type
 typedef struct s_token
 {
     enum e_token_type type;
-    char *value;
-    struct s_token *prev;
-    struct s_token *next;
+    char           *value;
+    struct s_token  *prev;
+    struct s_token  *next;
+    int             flag; 
 }             t_token;
 
 typedef struct  s_env
@@ -70,6 +71,11 @@ int	is_args(t_token *node);
 int	is_validchar(int c);
 int	rdir(t_token *node);
 int	skip_space(char *str, int i);
+
+// expander.c
+
+void    expander(t_data *data);
+void    select_expand_value(t_data *data, t_token *node);
 
 
 // parser.c
