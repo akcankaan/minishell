@@ -4,6 +4,9 @@
 #include <unistd.h>
 #include <string.h>
 #include <fcntl.h>
+#include <readline/readline.h>
+#include <readline/history.h>
+
 
 void debug_tokens(t_data *data) {
     t_token *token = data->token;
@@ -36,6 +39,30 @@ void hande_redirection(t_token *node)
             rdir_dup(open(node->next->value, O_WRONLY | O_CREAT | O_APPEND, 0644), STDOUT_FILENO);
         node = node->next;
     }
+}
+
+void handle_heredoc(t_token *node)
+{
+    int fd;
+    char *line;
+
+    fd = open("/tmp/heredoc_tmp", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    if (fd == -1)
+    {
+        perror("open");
+        exit(1);
+    }
+
+    while (1)
+    {
+        line = readline("> ");
+        if (!line || ft_strcmp(line, node->next->value) == 0)
+            break;
+        write(fd, line, ft_strlen(line));
+        write(fd, "\n", 1);
+        free(line);
+    }
+    close(fd);
 }
 void single_command(t_data *data) {
     while (data->token) {
@@ -116,6 +143,18 @@ void	pars_multiple(t_data *data, int pipes, int heredoc, int in_fd)
 					}
 					else
 						close(pipfd[0]);
+				}
+				if (node->type == HERADOC)
+				{
+    				handle_heredoc(node);  // Heredoc girdisini topla
+    				int heredoc_fd = open("/tmp/heredoc_tmp", O_RDONLY);
+    				if (heredoc_fd == -1)
+    				{
+        				perror("open");
+        				return;
+    				}
+    				dup2(heredoc_fd, STDIN_FILENO);  // Heredoc girdisini stdin'e yönlendir
+    				close(heredoc_fd);
 				}
 				if (node && node->type == PIPE)
 				{
