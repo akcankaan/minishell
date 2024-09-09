@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_echo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iecer <iecer@student.42kocaeli.com.tr>     +#+  +:+       +#+        */
+/*   By: mehakcan <mehakcan@student.42.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 12:30:22 by mehakcan          #+#    #+#             */
-/*   Updated: 2024/09/09 12:53:17 by iecer            ###   ########.fr       */
+/*   Updated: 2024/09/09 15:45:32 by mehakcan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ int	is_echo(char *str1, char *str2)
 	i = 0;
 	if (!str1 || !str2)
 		return (1);
-	i = 0;
-	while (ft_tolower(str1[i]) && str2[i] && str1[i] == str2[i])
+	while (str1[i] && str2[i] && (ft_tolower(str1[i]) == str2[i]))
 		i++;
 	return (str1[i] - str2[i]);
 }
