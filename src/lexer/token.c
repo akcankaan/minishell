@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehakcan <mehakcan@student.42.com.tr>      +#+  +:+       +#+        */
+/*   By: iecer <iecer@student.42kocaeli.com.tr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 12:30:03 by mehakcan          #+#    #+#             */
-/*   Updated: 2024/09/09 12:30:03 by mehakcan         ###   ########.fr       */
+/*   Updated: 2024/09/09 12:53:53 by iecer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #include "../../inc/minishell.h"
 #include <stddef.h>

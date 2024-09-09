@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehakcan <mehakcan@student.42.com.tr>      +#+  +:+       +#+        */
+/*   By: iecer <iecer@student.42kocaeli.com.tr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 12:31:21 by mehakcan          #+#    #+#             */
-/*   Updated: 2024/09/09 12:31:22 by mehakcan         ###   ########.fr       */
+/*   Updated: 2024/09/09 12:51:22 by iecer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 int	ft_isdigit(int x)
 {

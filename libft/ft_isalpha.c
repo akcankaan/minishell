@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehakcan <mehakcan@student.42.com.tr>      +#+  +:+       +#+        */
+/*   By: iecer <iecer@student.42kocaeli.com.tr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 12:31:16 by mehakcan          #+#    #+#             */
-/*   Updated: 2024/09/09 12:31:17 by mehakcan         ###   ########.fr       */
+/*   Updated: 2024/09/09 12:51:16 by iecer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 int	ft_isalpha(int x)
 {

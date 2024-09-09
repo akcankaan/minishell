@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehakcan <mehakcan@student.42.com.tr>      +#+  +:+       +#+        */
+/*   By: iecer <iecer@student.42kocaeli.com.tr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 12:32:13 by mehakcan          #+#    #+#             */
-/*   Updated: 2024/09/09 12:32:14 by mehakcan         ###   ########.fr       */
+/*   Updated: 2024/09/09 12:50:28 by iecer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef LIBFT_H
 # define LIBFT_H

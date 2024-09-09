@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehakcan <mehakcan@student.42.com.tr>      +#+  +:+       +#+        */
+/*   By: iecer <iecer@student.42kocaeli.com.tr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 12:31:29 by mehakcan          #+#    #+#             */
-/*   Updated: 2024/09/09 12:31:29 by mehakcan         ###   ########.fr       */
+/*   Updated: 2024/09/09 12:51:37 by iecer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #include <stdlib.h>
 

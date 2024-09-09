@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehakcan <mehakcan@student.42.com.tr>      +#+  +:+       +#+        */
+/*   By: iecer <iecer@student.42kocaeli.com.tr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 12:32:16 by mehakcan          #+#    #+#             */
-/*   Updated: 2024/09/09 12:33:18 by mehakcan         ###   ########.fr       */
+/*   Updated: 2024/09/09 12:50:52 by iecer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define HERE_SIG 1
 # define EXEC_SIG 2
 
-extern int				g_signal;
+extern int			g_signal;
 
 typedef struct s_malloc
 {

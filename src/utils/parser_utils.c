@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehakcan <mehakcan@student.42.com.tr>      +#+  +:+       +#+        */
+/*   By: iecer <iecer@student.42kocaeli.com.tr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 12:29:45 by mehakcan          #+#    #+#             */
-/*   Updated: 2024/09/09 12:29:46 by mehakcan         ###   ########.fr       */
+/*   Updated: 2024/09/09 12:54:08 by iecer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../inc/libft.h"
 #include "../../inc/minishell.h"

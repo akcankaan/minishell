@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehakcan <mehakcan@student.42.com.tr>      +#+  +:+       +#+        */
+/*   By: iecer <iecer@student.42kocaeli.com.tr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 12:32:05 by mehakcan          #+#    #+#             */
-/*   Updated: 2024/09/09 12:32:06 by mehakcan         ###   ########.fr       */
+/*   Updated: 2024/09/09 12:52:16 by iecer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../inc/libft.h"
 #include <stdlib.h>

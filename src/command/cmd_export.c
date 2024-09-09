@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_export.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehakcan <mehakcan@student.42.com.tr>      +#+  +:+       +#+        */
+/*   By: iecer <iecer@student.42kocaeli.com.tr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 12:30:30 by mehakcan          #+#    #+#             */
-/*   Updated: 2024/09/09 12:30:30 by mehakcan         ###   ########.fr       */
+/*   Updated: 2024/09/09 12:53:27 by iecer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #include "../../inc/libft.h"
 #include "../../inc/minishell.h"

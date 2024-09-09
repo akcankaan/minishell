@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehakcan <mehakcan@student.42.com.tr>      +#+  +:+       +#+        */
+/*   By: iecer <iecer@student.42kocaeli.com.tr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 12:31:44 by mehakcan          #+#    #+#             */
-/*   Updated: 2024/09/09 12:31:45 by mehakcan         ###   ########.fr       */
+/*   Updated: 2024/09/09 12:51:53 by iecer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 int	ft_strcmp(const char *str1, const char *str2)
 {

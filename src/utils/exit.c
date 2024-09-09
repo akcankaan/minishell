@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehakcan <mehakcan@student.42.com.tr>      +#+  +:+       +#+        */
+/*   By: iecer <iecer@student.42kocaeli.com.tr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 12:29:48 by mehakcan          #+#    #+#             */
-/*   Updated: 2024/09/09 12:29:48 by mehakcan         ###   ########.fr       */
+/*   Updated: 2024/09/09 12:54:05 by iecer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #include "../../inc/libft.h"
 #include "../../inc/minishell.h"
