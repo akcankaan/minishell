@@ -1,4 +1,18 @@
-#include "../../includes/minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mehakcan <mehakcan@student.42.com.tr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/09 12:29:40 by mehakcan          #+#    #+#             */
+/*   Updated: 2024/09/09 12:29:40 by mehakcan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
+#include "../../inc/libft.h"
+#include "../../inc/minishell.h"
 #include <limits.h>
 
 char	*ft_str_arr_join(char **str_list, unsigned int str_count)
@@ -27,16 +41,12 @@ char	*ft_str_arr_join(char **str_list, unsigned int str_count)
 	return (result);
 }
 
-int	is_space(char *cmd)
+int	rdir(t_token *node)
 {
-	int	i;
-
-	i = 0;
-	while (cmd[i] && cmd[i] == ' ')
-		i++;
-	if (cmd[i] == '\0')
-		return (0);
-	return (1);
+	if (node->type == HEREDOC)
+		return (2);
+	return (node->type == REDIRECT_IN || node->type == REDIRECT_OUT
+		|| node->type == APPEND);
 }
 
 int	is_args(t_token *node)
@@ -46,24 +56,14 @@ int	is_args(t_token *node)
 	return (node->type == WORD || node->type == DOUBLE_QUOTE);
 }
 
-int	is_validchar(int c)
-{
-	return (ft_isprint(c) && c != ' ');
-}
-
-
-int	rdir(t_token *node)
-{
-	if (node->type == HERADOC)
-		return (2);
-	return (node->type == REDIRECT_IN || node->type == REDIRECT_OUT
-		|| node->type == APPEND);
-}
-
-
 int	skip_space(char *str, int i)
 {
-	while (str[i] && str[i] == ' ')
+	while (str[i] && ft_isspace(str[i]))
 		i++;
 	return (i);
+}
+
+int	ft_validchar(int c)
+{
+	return (!ft_isspace(c) && ft_isprint(c));
 }

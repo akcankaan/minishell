@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehakcan <mehakcan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mehakcan <mehakcan@student.42.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/05 15:52:18 by mehakcan          #+#    #+#             */
-/*   Updated: 2023/12/26 10:59:01 by mehakcan         ###   ########.fr       */
+/*   Created: 2024/09/09 12:31:21 by mehakcan          #+#    #+#             */
+/*   Updated: 2024/09/09 12:31:22 by mehakcan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isdigit(int c)
+
+
+int	ft_isdigit(int x)
 {
-	return ('0' <= c && c <= '9');
+	if (x <= '9' && x >= '0')
+		return (1);
+	return (0);
 }

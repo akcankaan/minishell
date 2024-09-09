@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehakcan <mehakcan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mehakcan <mehakcan@student.42.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/05 15:52:07 by mehakcan          #+#    #+#             */
-/*   Updated: 2023/12/26 10:57:55 by mehakcan         ###   ########.fr       */
+/*   Created: 2024/09/09 12:31:16 by mehakcan          #+#    #+#             */
+/*   Updated: 2024/09/09 12:31:17 by mehakcan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isalpha(int c)
+
+int	ft_isalpha(int x)
 {
-	return (('A' <= c && c <= 'Z') || ('a' <= c && c <= 'z'));
+	if ((x <= 'Z' && x >= 'A') || (x <= 'z' && x >= 'a'))
+		return (1);
+	return (0);
 }

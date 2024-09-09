@@ -3,55 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehakcan <mehakcan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mehakcan <mehakcan@student.42.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/18 13:25:36 by mehakcan          #+#    #+#             */
-/*   Updated: 2023/12/26 12:12:44 by mehakcan         ###   ########.fr       */
+/*   Created: 2024/09/09 12:31:29 by mehakcan          #+#    #+#             */
+/*   Updated: 2024/09/09 12:31:29 by mehakcan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 
-static int	ft_numlen(int num)
+
+#include <stdlib.h>
+
+static int	calc(int n)
 {
-	int	i;
+	int	x;
 
-	if (num == 0)
+	x = 0;
+	if (n == 0)
 		return (1);
-	i = 0;
-	while (num != 0)
+	if (n < 0)
+		x++;
+	while (n != 0)
 	{
-		num /= 10;
-		i++;
+		n /= 10;
+		x++;
 	}
-	return (i);
+	return (x);
 }
 
-char	*ft_itoa(int n)
+char	*ft_itoa(int nbr)
 {
-	int		len;
-	char	*ptr;
-	long	nbr;
+	long	temp;
+	char	*str;
+	int		x;
 
-	nbr = n;
-	len = ft_numlen(nbr);
-	if (n < 0)
-	{
-		len++;
-		nbr = -nbr;
-	}
-	ptr = (char *)malloc(sizeof(char) * len + 1);
-	if (!ptr)
+	temp = nbr;
+	x = calc(temp);
+	str = malloc(x + 1);
+	if (!str)
 		return (NULL);
-	ptr[len] = '\0';
-	while (nbr > 0)
+	if (nbr < 0)
 	{
-		ptr[--len] = nbr % 10 + 48;
-		nbr /= 10;
+		temp *= -1;
 	}
-	if (n < 0)
-		ptr[0] = '-';
-	if (n == 0)
-		ptr[0] = '0';
-	return (ptr);
+	str[x] = '\0';
+	while (x--)
+	{
+		str[x] = temp % 10 + '0';
+		temp /= 10;
+	}
+	if (nbr < 0)
+		str[0] = '-';
+	return (str);
 }

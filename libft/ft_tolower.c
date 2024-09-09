@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehakcan <mehakcan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mehakcan <mehakcan@student.42.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/07 12:19:20 by mehakcan          #+#    #+#             */
-/*   Updated: 2023/12/12 12:48:41 by mehakcan         ###   ########.fr       */
+/*   Created: 2024/09/09 12:32:09 by mehakcan          #+#    #+#             */
+/*   Updated: 2024/09/09 12:32:09 by mehakcan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 int	ft_tolower(int c)
 {

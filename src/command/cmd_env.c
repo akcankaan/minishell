@@ -1,24 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   cmd_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mehakcan <mehakcan@student.42.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/09 12:31:34 by mehakcan          #+#    #+#             */
-/*   Updated: 2024/09/09 12:31:34 by mehakcan         ###   ########.fr       */
+/*   Created: 2024/09/09 12:30:25 by mehakcan          #+#    #+#             */
+/*   Updated: 2024/09/09 12:30:25 by mehakcan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#include "../inc/libft.h"
-#include <unistd.h>
 
-void	ft_putendl_fd(char *s, int fd)
+#include "../../inc/minishell.h"
+#include <stdio.h>
+
+void	cmd_env(t_data *data, t_token *node)
 {
-	if (s)
+	t_env	*env;
+
+	env = data->env;
+	if (!node->next)
 	{
-		ft_putstr_fd(s, fd);
-		write(fd, "\n", 1);
+		while (env)
+		{
+			if (env->value)
+				printf("%s=%s\n", env->key, env->value);
+			env = env->next;
+		}
 	}
+	*get_exit_status() = 0;
 }

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehakcan <mehakcan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mehakcan <mehakcan@student.42.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/05 16:09:43 by mehakcan          #+#    #+#             */
-/*   Updated: 2023/12/26 15:23:59 by mehakcan         ###   ########.fr       */
+/*   Created: 2024/09/09 12:31:23 by mehakcan          #+#    #+#             */
+/*   Updated: 2024/09/09 12:31:24 by mehakcan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isprint(int c)
+
+int	ft_isprint(int x)
 {
-	return (32 <= c && c <= 126);
+	return (x < 127 && x > 31);
 }

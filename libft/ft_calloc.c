@@ -3,21 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehakcan <mehakcan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mehakcan <mehakcan@student.42.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/09 11:10:08 by mehakcan          #+#    #+#             */
-/*   Updated: 2023/12/26 10:55:42 by mehakcan         ###   ########.fr       */
+/*   Created: 2024/09/09 12:31:11 by mehakcan          #+#    #+#             */
+/*   Updated: 2024/09/09 12:31:11 by mehakcan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 
-void	*ft_calloc(size_t count, size_t size)
+
+#include "../inc/libft.h"
+#include <stdlib.h>
+
+void	*ft_calloc(size_t c, size_t s)
 {
-	void	*ret;
+	char	*ptr;
 
-	ret = malloc(count * size);
-	if (ret)
-		ft_bzero(ret, count * size);
-	return (ret);
+	ptr = malloc(c * s);
+	if (!ptr)
+		return (NULL);
+	ft_bzero(ptr, s * c);
+	return (ptr);
 }

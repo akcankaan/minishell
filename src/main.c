@@ -1,44 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mehakcan <mehakcan@student.42.com.tr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/09 12:29:28 by mehakcan          #+#    #+#             */
+/*   Updated: 2024/09/09 12:29:32 by mehakcan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../inc/libft.h"
+#include "../inc/minishell.h"
 #include <stdio.h>
-#include "../libft/libft.h"
-#include "../includes/minishell.h"
 #include <readline/history.h>
 #include <readline/readline.h>
-#include <string.h>
-#include <unistd.h>
+#include <signal.h>
 
-void    initilazor(t_data *data)
+int		g_signal = 0;
+
+void	initilazor(t_data *data)
 {
-    data->env = gc_malloc(sizeof(t_env));
-    data->token = NULL;
-    data->cmd = 0;
-    data->prompt = 0;
-}
-
-void    get_readline(t_data *data)
-{
-    data->cmd = readline("Minishell$ ");
-    if (data->cmd && !is_space(data->cmd))
-    {
-        free(data->cmd);
-        get_readline(data);
-    }
-    if (!data->cmd)
-        ft_exit();
-    add_history(data->cmd);
-}
-
-t_env    *get_env(t_data *data, char *key)
-{
-    t_env	*node;
-
-    node = data->env;
-    while (node)
-    {
-        if (!ft_strcmp(node->key, key))
-            return (node);
-        node = node->next;
-    }
-    return (NULL);
+	data->env = gc_malloc(sizeof(t_env));
+	data->token = NULL;
+	data->cmd = 0;
+	data->syntax = 0;
+	data->in_fd = 0;
+	data->pid = 0;
+	data->pipes = 0;
+	data->here = 0;
 }
 
 void	create_env(char **envp, t_data *data)
@@ -53,7 +43,7 @@ void	create_env(char **envp, t_data *data)
 	{
 		tmp = ft_strchr(envp[i], '=');
 		data->env->key = ft_substr(envp[i], 0, tmp - envp[i]);
-		data->env->value = ft_substr(envp[i], tmp - envp[i] + 1,
+		data->env->value = ft_substr(envp[i], (tmp - envp[i]) + 1,
 				ft_strlen(envp[i]));
 		add_garbage_c(data->env->key);
 		add_garbage_c(data->env->value);
@@ -62,34 +52,62 @@ void	create_env(char **envp, t_data *data)
 		data->env = data->env->next;
 	}
 	data->env = node;
+	update_oldpwd(data, NULL);
 }
 
-int main(int ac, char **av, char **env)
+t_env	*get_env(t_data *data, char *key)
 {
-    t_data data;
-    (void)av;
-    (void)env;
-    if (ac >= 2)
-        return (0);
-    initilazor(&data);
-    if (env && *env)
-        create_env(env, &data);
-    while (1)
-    {
-        get_readline(&data);
-        lexer(&data);
-        //token a ekleme yapılıp yapılmadığını kontrol etmek için
-        //while (data.token)
-        //{
-        //    printf("Value = %s\n", data.token->value);
-        //    printf("Type = %d\n", data.token->type);
-        //    data.token = data.token->next;
-        //}
-        expander(&data);
-        parse_commands(&data);
-        free_token(&data);
-        free(data.cmd);
-    }
-    ft_exit();
-    return (0);
+	t_env	*node;
+
+	node = data->env;
+	while (node)
+	{
+		if (!ft_strcmp(node->key, key))
+			return (node);
+		node = node->next;
+	}
+	return (NULL);
+}
+
+void	cycle(t_data *data)
+{
+	while (1)
+	{
+		g_signal = PROMT_SIG;
+		signal_base();
+		data->cmd = readline("omega bash-0.1$ ");
+		if (!data->cmd)
+			break ;
+		add_garbage_c(data->cmd);
+		add_history(data->cmd);
+		lexer(data);
+		if (data->syntax)
+		{
+			printf("syntax error\n");
+			free_token(data);
+			garbage_collecter(data->cmd);
+			data->syntax = 0;
+			continue ;
+		}
+		expander(data);
+		parser(data);
+		free_token(data);
+		garbage_collecter(data->cmd);
+	}
+}
+
+int	main(int ac, char **av, char **env)
+{
+	t_data	data;
+
+	(void)av;
+	if (ac >= 2)
+		return (0);
+	initilazor(&data);
+	if (env)
+		create_env(env, &data);
+	signal(SIGINT, handle_sigint);
+	cycle(&data);
+	gc_free();
+	return (0);
 }

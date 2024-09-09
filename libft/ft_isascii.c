@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehakcan <mehakcan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mehakcan <mehakcan@student.42.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/05 15:52:22 by mehakcan          #+#    #+#             */
-/*   Updated: 2023/12/26 10:58:35 by mehakcan         ###   ########.fr       */
+/*   Created: 2024/09/09 12:31:19 by mehakcan          #+#    #+#             */
+/*   Updated: 2024/09/09 12:31:19 by mehakcan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isascii(int c)
+
+int	ft_isascii(int x)
 {
-	return (c >= 0 && c <= 127);
+	if (x <= 127 && x >= 0)
+		return (1);
+	return (0);
 }

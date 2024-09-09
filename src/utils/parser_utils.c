@@ -1,11 +1,21 @@
-#include "../../includes/minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mehakcan <mehakcan@student.42.com.tr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/09 12:29:45 by mehakcan          #+#    #+#             */
+/*   Updated: 2024/09/09 12:29:46 by mehakcan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
+#include "../../inc/libft.h"
+#include "../../inc/minishell.h"
 #include <sys/stat.h>
 #include <unistd.h>
 
-int	is_path(char *str)
-{
-	return ((str[0] == '.' && str[1] == '/') || str[0] == '/');
-}
 int	is_directory(char *path)
 {
 	struct stat	path_stat;
@@ -17,6 +27,8 @@ int	is_directory(char *path)
 
 char	*handle_executable_file(t_token *node, char *path)
 {
+	char	*tmp;
+
 	if (is_directory(path))
 	{
 		print_error(node, ": is a directory\n", 126);
@@ -25,7 +37,11 @@ char	*handle_executable_file(t_token *node, char *path)
 	else if (access(path, F_OK) == 0)
 	{
 		if (access(path, X_OK) == 0)
-			return (ft_strdup(path));
+		{
+			tmp = ft_strdup(path);
+			add_garbage_c(tmp);
+			return (tmp);
+		}
 		print_error(node, ": Permission denied\n", 126);
 		return (NULL);
 	}
@@ -37,11 +53,15 @@ char	*finding_path(t_data *data, t_token *node)
 {
 	t_env	*env;
 	char	**path;
-	char	*tmp;
 	int		i;
 
-	tmp = NULL;
 	i = -1;
+	if (!node)
+		return (NULL);
+	if (!(*node->value))
+		return (print_error(data->token, ": command not found\n", 127), NULL);
+	if (builtins(node->value))
+		return (NULL);
 	if (is_path(node->value))
 		return (handle_executable_file(node, node->value));
 	env = get_env(data, "PATH");
@@ -51,21 +71,7 @@ char	*finding_path(t_data *data, t_token *node)
 	add_garbage_c(path);
 	while (path[++i])
 		add_garbage_c(path[i]);
-	i = 0;
-	while (path[i])
-	{
-		tmp = ft_str_arr_join((char *[]){path[i], "/", node->value}, 3);
-		if (access(tmp, F_OK) == 0)
-		{
-			if (access(tmp, X_OK) == 0)
-				return (tmp);
-			else
-				print_error(node, ": Permission denied\n", 126);
-		}
-		i++;
-		garbage_collecter(tmp);
-	}
-	return ((print_error(node, ": command not found\n", 127)), NULL);
+	return (check_path(path, node));
 }
 
 char	**env_to_char(t_data *data)

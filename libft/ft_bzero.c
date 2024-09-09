@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mehakcan <mehakcan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mehakcan <mehakcan@student.42.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/05 18:07:27 by mehakcan          #+#    #+#             */
-/*   Updated: 2023/12/27 16:32:11 by mehakcan         ###   ########.fr       */
+/*   Created: 2024/09/09 12:31:08 by mehakcan          #+#    #+#             */
+/*   Updated: 2024/09/09 12:31:08 by mehakcan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+
+
+#include "../inc/libft.h"
 
 void	ft_bzero(void *s, size_t n)
 {
