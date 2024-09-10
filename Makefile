@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: iecer <iecer@student.42kocaeli.com.tr>     +#+  +:+       +#+         #
+#    By: mehakcan <mehakcan@student.42.com.tr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/09 12:49:32 by iecer             #+#    #+#              #
-#    Updated: 2024/09/09 12:49:34 by iecer            ###   ########.fr        #
+#    Updated: 2024/09/10 12:56:20 by mehakcan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,20 +69,5 @@ fclean: clean
 	@$(MAKE) -C libft fclean
 
 re: fclean all
-
-
-
-iclean:
-	@grep -v '^#' .gitignore | grep -v '^$$' | while read pattern; do \
-		find . -name "$$pattern" -exec rm -rf {} +; \
-	done
-
-norm:
-	@if norminette | grep -q "Error"; then \
-		echo "Norminette: \033[31m[KO]\033[0m"; \
-		norminette | grep "Error"; \
-	else \
-		echo "Norminette: \033[32m[OK]\033[0m"; \
-	fi
 
 .PHONY: all fclean clean re

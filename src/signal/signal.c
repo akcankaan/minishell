@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iecer <iecer@student.42kocaeli.com.tr>     +#+  +:+       +#+        */
+/*   By: mehakcan <mehakcan@student.42.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 12:29:55 by mehakcan          #+#    #+#             */
-/*   Updated: 2024/09/09 12:53:57 by iecer            ###   ########.fr       */
+/*   Updated: 2024/09/10 12:53:59 by mehakcan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,29 @@
 #include <readline/readline.h>
 #include <signal.h>
 
+int	*get_sig_stat(void)
+{
+	static int	sig_stat = 0;
+
+	return (&sig_stat);
+}
+
 void	handle_sigint(int sig)
 {
 	*get_exit_status() = 128 + sig;
-	if (g_signal == HERE_SIG)
+	if (*get_sig_stat() == HERE_SIG)
 	{
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		ft_exit(NULL);
 	}
-	else if (g_signal == EXEC_SIG)
+	else if (*get_sig_stat() == EXEC_SIG)
 	{
 		printf("\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);
 	}
-	else if (g_signal == PROMT_SIG)
+	else if (*get_sig_stat() == PROMT_SIG)
 	{
 		printf("\n");
 		rl_on_new_line();
@@ -42,16 +49,13 @@ void	handle_sigint(int sig)
 void	handle_sigquit(int sig)
 {
 	*get_exit_status() = 128 + sig;
-	if (g_signal == EXEC_SIG)
-	{
-		printf("Quit : %d\n", sig);
-		rl_replace_line("", 0);
-	}
+	printf("Quit : %d\n", sig);
+	rl_replace_line("", 0);
 }
 
 void	signal_base(void)
 {
-	if (g_signal == EXEC_SIG)
+	if (*get_sig_stat() == EXEC_SIG)
 		signal(SIGQUIT, handle_sigquit);
 	else
 		signal(SIGQUIT, SIG_IGN);

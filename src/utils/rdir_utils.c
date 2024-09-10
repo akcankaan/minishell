@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rdir_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iecer <iecer@student.42kocaeli.com.tr>     +#+  +:+       +#+        */
+/*   By: mehakcan <mehakcan@student.42.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 12:29:43 by mehakcan          #+#    #+#             */
-/*   Updated: 2024/09/09 12:54:12 by iecer            ###   ########.fr       */
+/*   Updated: 2024/09/10 12:53:24 by mehakcan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	handle_heredoc(char *delimiter, t_data *data)
 	fd = open("/tmp/.heredoc_tmp", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
 		ft_exit(strerror(errno));
-	g_signal = HERE_SIG;
+	*get_sig_stat() = HERE_SIG;
 	while (1)
 	{
 		line = readline("> ");
@@ -78,7 +78,7 @@ void	rdir_dup(int fd, int std, t_token *node)
 	if (fd == -1)
 	{
 		print_error(node, ": No such file or directory\n", 1);
-		ft_exit(NULL);
+		return ;
 	}
 	dup2(fd, std);
 	close(fd);
@@ -88,7 +88,7 @@ void	handle_redirection(t_token *node, t_data *data)
 {
 	if (data->here)
 		exec_heredoc(node, data);
-	g_signal = EXEC_SIG;
+	*get_sig_stat() = EXEC_SIG;
 	while (node && (rdir(node) || is_args(node)))
 	{
 		if (permission_check(node))

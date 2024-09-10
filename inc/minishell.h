@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iecer <iecer@student.42kocaeli.com.tr>     +#+  +:+       +#+        */
+/*   By: mehakcan <mehakcan@student.42.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 12:32:16 by mehakcan          #+#    #+#             */
-/*   Updated: 2024/09/09 12:50:52 by iecer            ###   ########.fr       */
+/*   Updated: 2024/09/10 12:54:19 by mehakcan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 # define PROMT_SIG 0
 # define HERE_SIG 1
 # define EXEC_SIG 2
-
-extern int			g_signal;
 
 typedef struct s_malloc
 {
@@ -68,6 +66,7 @@ typedef struct s_data
 	int					here;
 }						t_data;
 
+int						*get_sig_stat(void);
 t_malloc				*get_garbage_c(void);
 void					*gc_malloc(unsigned int size);
 void					add_garbage_c(void *ptr);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_conf.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iecer <iecer@student.42kocaeli.com.tr>     +#+  +:+       +#+        */
+/*   By: mehakcan <mehakcan@student.42.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 12:30:10 by mehakcan          #+#    #+#             */
-/*   Updated: 2024/09/09 12:53:36 by iecer            ###   ########.fr       */
+/*   Updated: 2024/09/10 12:40:30 by mehakcan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	handle_child_process(t_data *data, t_token *node, int pipfd[2],
 
 t_token	*handle_parent_process(t_data *data, int pipfd[2], t_token *node)
 {
-	g_signal = EXEC_SIG;
+	*get_sig_stat() = EXEC_SIG;
 	if (data->in_fd != 0)
 		close(data->in_fd);
 	if (data->here)

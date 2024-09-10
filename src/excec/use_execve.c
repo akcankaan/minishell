@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   use_execve.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iecer <iecer@student.42kocaeli.com.tr>     +#+  +:+       +#+        */
+/*   By: mehakcan <mehakcan@student.42.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 12:30:16 by mehakcan          #+#    #+#             */
-/*   Updated: 2024/09/09 12:53:43 by iecer            ###   ########.fr       */
+/*   Updated: 2024/09/10 12:26:01 by mehakcan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	use_execve(t_data *data)
 	char	*path;
 	char	**args;
 
-	g_signal = EXEC_SIG;
+	*get_sig_stat() = EXEC_SIG;
 	signal_base();
 	env = env_to_char(data);
 	if (is_args(data->token))

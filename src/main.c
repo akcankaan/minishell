@@ -6,7 +6,7 @@
 /*   By: mehakcan <mehakcan@student.42.com.tr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 12:29:28 by mehakcan          #+#    #+#             */
-/*   Updated: 2024/09/09 15:45:43 by mehakcan         ###   ########.fr       */
+/*   Updated: 2024/09/10 12:25:05 by mehakcan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 #include <readline/history.h>
 #include <readline/readline.h>
 #include <signal.h>
-
-int		g_signal = 0;
 
 void	initilazor(t_data *data)
 {
@@ -73,7 +71,7 @@ void	cycle(t_data *data)
 {
 	while (1)
 	{
-		g_signal = PROMT_SIG;
+		*get_sig_stat() = PROMT_SIG;
 		signal_base();
 		data->cmd = readline("WSB bash-0.1$ ");
 		if (!data->cmd)
