@@ -40,10 +40,10 @@ Komutları PATH değişkenine ya da göreceli/absolüt yollara göre çalıştı
 - ctrl-D: Shell'den çıkış yapar.
 - ctrl-\: Hiçbir işlem yapmaz (bash'te olduğu gibi).
 #### Yönlendirmeler:
-- <: Girdi yönlendirmesi.
-- >: Çıktı yönlendirmesi.
-- <<: Belirtilen sonlandırıcıya kadar girdiyi okuyan heredoc.
-- >>: Ekleme modunda çıktı yönlendirmesi.
+- *<:* Girdi yönlendirmesi.
+- *>:* Çıktı yönlendirmesi.
+- *<<:* Belirtilen sonlandırıcıya kadar girdiyi okuyan heredoc.
+- *>>:* Ekleme modunda çıktı yönlendirmesi.
 #### Boru hattı (pipe):
 | karakteri ile komutları zincirleyerek birbirine bağlar.
 #### Çevresel değişkenler: 
