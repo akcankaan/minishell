@@ -8,7 +8,7 @@ Minishell şu özellikleri destekler:
 - Komut istemi: Kullanıcı girişini bekleyen bir komut istemi görüntüler.
 - Komut yürütme: Komutları PATH değişkenine ya da göreceli/absolüt yollara göre çalıştırır.
 - Yerleşik komutlar:
-   echo: (opsiyonel -n ile)
+   [echo] (opsiyonel -n ile)
    cd (göreceli veya absolüt yol ile)
    pwd
    export
