@@ -60,6 +60,7 @@ $DEĞİŞKEN ve $? son komutun çıkış durumu gibi çevresel değişkenlerin g
 
 - [Mehmet Kaan Akcan](https://github.com/akcankaan)
 - [İbrahim Ecer](https://github.com/ibrahimecer)
+
 Bu proje bizim 42Kocaeli de yaptığımız bir projedir. Bu repodaki bilgiler proje ile ilgili kısa bilgilendirmeleri içerir.
 
 
