@@ -16,6 +16,11 @@ Makefile kullanarak projeyi derleyin:
 make
 ```
 
+Minishell'i başlatın:
+ ```bash
+./minishell
+```
+
 ## Özellikler
 Minishell şu özellikleri destekler:
 #### Komut istemi: 
@@ -50,3 +55,11 @@ $DEĞİŞKEN ve $? son komutun çıkış durumu gibi çevresel değişkenlerin g
 - readline() fonksiyonu haricinde bellek sızıntısı bulunmamalıdır.
 - Makefile, -Wall -Wextra -Werror bayraklarıyla programı derlemelidir.
 - readline gibi harici kütüphanelerin kullanımı serbesttir.
+
+## Geliştiriciler
+
+- [Mehmet Kaan Akcan](https://github.com/akcankaan)
+- [İbrahim Ecer](https://github.com/ibrahimecer)
+Bu proje bizim 42Kocaeli de yaptığımız bir projedir. Bu repodaki bilgiler proje ile ilgili kısa bilgilendirmeleri içerir.
+
+
